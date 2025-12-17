@@ -28,8 +28,14 @@ def check_password():
     
     def password_entered():
         """Checks whether a password entered by the user is correct."""
-        username = os.getenv("STREAMLIT_USERNAME", "CityGroup")
-        password = os.getenv("STREAMLIT_PASSWORD", "CityGroup")
+        # CRITICAL: Credentials ONLY from .env file, NOT hardcoded
+        username = os.getenv("STREAMLIT_USERNAME")
+        password = os.getenv("STREAMLIT_PASSWORD")
+        
+        # Security check: Fail if .env not configured
+        if not username or not password:
+            st.error("⚠️ Security Error: .env file not configured. Please create .env with STREAMLIT_USERNAME and STREAMLIT_PASSWORD")
+            st.stop()
         
         if st.session_state["username"] == username and \
            st.session_state["password"] == password:
