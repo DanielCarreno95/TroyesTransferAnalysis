@@ -45,27 +45,12 @@ def check_password():
             st.session_state["password_correct"] = False
     
     if "password_correct" not in st.session_state:
-        # Login page styling with blue soccer field background
+        # Login page styling with simple Troyes blue background (compatible with all browsers)
         st.markdown("""
         <style>
         .stApp {
-            background: linear-gradient(135deg, #1a4d7a 0%, #2d6ba3 30%, #4a90d9 60%, #6bb3f0 100%);
-            background-image: 
-                /* Soccer field lines */
-                repeating-linear-gradient(0deg, transparent, transparent 98%, rgba(255, 255, 255, 0.3) 98%, rgba(255, 255, 255, 0.3) 100%),
-                repeating-linear-gradient(90deg, transparent, transparent 98%, rgba(255, 255, 255, 0.3) 98%, rgba(255, 255, 255, 0.3) 100%),
-                /* Center circle */
-                radial-gradient(circle at 50% 50%, transparent 20%, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 25%, transparent 25%),
-                /* Corner arcs */
-                radial-gradient(circle at 0% 0%, transparent 8%, rgba(255, 255, 255, 0.2) 8%, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
-                radial-gradient(circle at 100% 0%, transparent 8%, rgba(255, 255, 255, 0.2) 8%, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
-                radial-gradient(circle at 0% 100%, transparent 8%, rgba(255, 255, 255, 0.2) 8%, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
-                radial-gradient(circle at 100% 100%, transparent 8%, rgba(255, 255, 255, 0.2) 8%, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
-                /* Field texture */
-                radial-gradient(ellipse at 30% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 60%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background: linear-gradient(135deg, #003366 0%, #0066CC 50%, #0099FF 100%);
             background-attachment: fixed;
-            background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
         }
         .main {
             background: transparent;
@@ -121,27 +106,12 @@ def check_password():
             st.markdown('</div>', unsafe_allow_html=True)
         return False
     elif not st.session_state["password_correct"]:
-        # Login page styling for retry with blue soccer field background
+        # Login page styling for retry with simple Troyes blue background (compatible with all browsers)
         st.markdown("""
         <style>
         .stApp {
-            background: linear-gradient(135deg, #1a4d7a 0%, #2d6ba3 30%, #4a90d9 60%, #6bb3f0 100%);
-            background-image: 
-                /* Soccer field lines */
-                repeating-linear-gradient(0deg, transparent, transparent 98%, rgba(255, 255, 255, 0.3) 98%, rgba(255, 255, 255, 0.3) 100%),
-                repeating-linear-gradient(90deg, transparent, transparent 98%, rgba(255, 255, 255, 0.3) 98%, rgba(255, 255, 255, 0.3) 100%),
-                /* Center circle */
-                radial-gradient(circle at 50% 50%, transparent 20%, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 25%, transparent 25%),
-                /* Corner arcs */
-                radial-gradient(circle at 0% 0%, transparent 8%, rgba(255, 255, 255, 0.2) 8%, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
-                radial-gradient(circle at 100% 0%, transparent 8%, rgba(255, 255, 255, 0.2) 8%, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
-                radial-gradient(circle at 0% 100%, transparent 8%, rgba(255, 255, 255, 0.2) 8%, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
-                radial-gradient(circle at 100% 100%, transparent 8%, rgba(255, 255, 255, 0.2) 8%, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
-                /* Field texture */
-                radial-gradient(ellipse at 30% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 60%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background: linear-gradient(135deg, #003366 0%, #0066CC 50%, #0099FF 100%);
             background-attachment: fixed;
-            background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
         }
         .main {
             background: transparent;
