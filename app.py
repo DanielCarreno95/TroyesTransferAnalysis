@@ -28,10 +28,16 @@ def check_password():
     
     def password_entered():
         """Checks whether a password entered by the user is correct."""
-        # Read credentials from .env file, with fallback to defaults
-        # Priority: .env file > environment variables > defaults
-        username = os.getenv("STREAMLIT_USERNAME", "CityGroup")
-        password = os.getenv("STREAMLIT_PASSWORD", "CityGroup")
+        # CRITICAL: Read credentials ONLY from .env file - NO hardcoded values
+        username = os.getenv("STREAMLIT_USERNAME")
+        password = os.getenv("STREAMLIT_PASSWORD")
+        
+        # Validate .env file exists and has credentials
+        if not username or not password:
+            st.error("❌ Error: .env file not found or incomplete. Please ensure .env file exists with STREAMLIT_USERNAME and STREAMLIT_PASSWORD")
+            st.info("💡 Tip: Copy .env.example to .env and set your credentials")
+            st.stop()
+            return
         
         if st.session_state["username"] == username and \
            st.session_state["password"] == password:
