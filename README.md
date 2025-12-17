@@ -268,8 +268,13 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()  # Loads .env file
-username = os.getenv("STREAMLIT_USERNAME", "CityGroup")
-password = os.getenv("STREAMLIT_PASSWORD", "CityGroup")
+# CRITICAL: Credentials ONLY from .env - NO hardcoded values
+username = os.getenv("STREAMLIT_USERNAME")  # Must exist in .env
+password = os.getenv("STREAMLIT_PASSWORD")  # Must exist in .env
+
+# Application will show error if .env is missing or incomplete
+if not username or not password:
+    raise ValueError("❌ .env file required with STREAMLIT_USERNAME and STREAMLIT_PASSWORD")
 ```
 
 **3. Verify in `.gitignore`:**
@@ -279,9 +284,13 @@ password = os.getenv("STREAMLIT_PASSWORD", "CityGroup")
 ```
 
 **Why This Matters:**
+- **NO credentials in source code**: The application reads credentials ONLY from `.env` file
+- **No hardcoded values**: If `.env` is missing, the app shows an error (no fallback credentials)
 - Prevents accidental credential exposure in GitHub
 - Allows secure deployment to production
 - Follows industry security standards
+
+**⚠️ IMPORTANT**: The application will NOT work without a properly configured `.env` file. There are NO hardcoded credentials in the source code.
 
 ## Installation
 
@@ -296,13 +305,17 @@ cd troyes_analysis
 pip install -r requirements.txt
 ```
 
-3. **Set up environment variables**:
+3. **Set up environment variables** (REQUIRED):
 ```bash
-cp .env.example .env
+# The repository includes a .env file with default credentials
+# If you need to create your own, copy the template:
+cp .env .env.backup  # Backup existing .env
 # Edit .env and set your credentials:
-# STREAMLIT_USERNAME=CityGroup
-# STREAMLIT_PASSWORD=your_password_here
+# STREAMLIT_USERNAME=your_username
+# STREAMLIT_PASSWORD=your_password
 ```
+
+**⚠️ CRITICAL**: The application requires a `.env` file with `STREAMLIT_USERNAME` and `STREAMLIT_PASSWORD`. Without it, the app will show an error and stop. There are NO hardcoded credentials in the code.
 
 4. **Run the application**:
 ```bash
@@ -347,8 +360,7 @@ troyes_analysis/
 │   ├── beautifulsoup4
 │   └── python-dotenv
 │
-├── .env.example            # Environment variables template
-├── .env                    # Actual credentials (NOT in Git)
+├── .env                    # Credentials file (REQUIRED - not in Git)
 ├── .gitignore             # Git ignore rules (.env excluded)
 └── README.md              # This file
 ```
@@ -384,10 +396,12 @@ troyes_analysis/
 
 ## Security
 
-- ✅ Credentials stored in `.env` file (not committed to Git)
+- ✅ **Credentials ONLY in `.env` file** - NO credentials in source code
+- ✅ **No hardcoded values** - Application requires `.env` file to function
 - ✅ Password-protected access
-- ✅ `.env` file included in `.gitignore`
-- ✅ No hardcoded secrets in source code
+- ✅ `.env` file included in `.gitignore` (not committed to Git)
+- ✅ Application validates `.env` exists before allowing login
+- ✅ Follows security best practices: credentials never in version control
 
 ## GitHub Structure Best Practices
 
@@ -395,7 +409,7 @@ This repository follows professional GitHub structure:
 
 1. **Clear README**: Comprehensive documentation
 2. **Requirements file**: All dependencies listed
-3. **Environment template**: `.env.example` shows required variables
+3. **Environment file**: `.env` file with credentials (required for app to run)
 4. **Git ignore**: Excludes sensitive files (`.env`, `__pycache__`, etc.)
 5. **Modular code**: Separate files for scraping, app, and utilities
 6. **Documentation**: Inline comments and notebook explanations
